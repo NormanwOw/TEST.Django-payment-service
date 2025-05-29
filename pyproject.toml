@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "test-django-payment-service"
+version = "0.1.0"
+description = ""
+authors = ["NormanwOw <normjkeee@vk.com>"]
+readme = "README.md"
+packages = [{include = "test"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "4.2.17"
+flake8 = "^7.2.0"
+flake8-print = "^5.0.0"
+pre-commit = "^4.2.0"
+pydantic-settings = "^2.9.1"
+djangorestframework = "^3.16.0"
+mysqlclient = "^2.2.7"
+pymysql = "^1.1.1"
+drf-spectacular = "^0.28.0"
+gunicorn = "^23.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
