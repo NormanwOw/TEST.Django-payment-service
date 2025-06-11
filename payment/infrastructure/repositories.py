@@ -20,12 +20,14 @@ class OrganizationRepository(IOrganizationRepository):
 
     @classmethod
     def get(cls, inn: int) -> Optional[Organization]:
-        organization_model = cls.model.objects.filter(inn=inn).first()
+        organization_model = cls.model.objects.select_for_update().filter(inn=inn).first()
         return organization_model.to_domain() if organization_model else None
 
     @classmethod
     def update(cls, organization: Organization) -> Organization:
-        cls.model.objects.filter(inn=organization.inn).update(balance=organization.balance)
+        cls.model.objects.select_for_update().filter(inn=organization.inn).update(
+            balance=organization.balance
+        )
         return organization
 
     @classmethod
