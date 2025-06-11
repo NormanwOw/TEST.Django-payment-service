@@ -10,14 +10,13 @@ from payment.application.use_cases.handle_payment import HandlePaymentUseCase
 from payment.domain.exceptions import PaymentAlreadyExist, OrganizationDoesNotExist
 from payment.domain.services.payment_service import ProcessPaymentService
 from payment.infrastructure.uow.impl import UnitOfWork
-from payment.infrastructure.uow.utils import TransactionLevel
 from payment.presentation.serializers import (BankWebhookSerializer, OrganizationBalanceSerializer,
                                               StatusOKSerializer, StatusSuccessSerializer)
 
 
 class BankWebhookView(APIView):
     serializer_class = BankWebhookSerializer
-    uow = UnitOfWork(transaction_level=TransactionLevel.SERIALIZABLE)
+    uow = UnitOfWork()
     logger = Logger()
     payment_service = ProcessPaymentService(uow, logger)
     handle_payment_use_case = HandlePaymentUseCase(payment_service, uow, logger)
